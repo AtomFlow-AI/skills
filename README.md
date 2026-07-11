@@ -64,6 +64,19 @@ Use a skill once without installing it:
 npx skills use AtomFlow-AI/skills --skill rdkit-svg-emphasis --full-depth
 ```
 
+### Bootstrap a new Codex installation
+
+Install the complete AtomFlow catalog, the official Lark skill suite, and the
+team's optional Codex plugins with one command:
+
+```bash
+bash scripts/bootstrap_codex_skills.sh
+```
+
+Use `--dry-run` to inspect the commands first. See
+[`docs/codex-bootstrap.md`](docs/codex-bootstrap.md) for the installed sets,
+optional flags, authentication boundary, and items that Codex supplies itself.
+
 ## Publish a personal skill
 
 1. Create `skills/<your-github-username>/<skill-name>/`, or use
@@ -80,4 +93,3 @@ rules.
 Skills can execute instructions and bundled scripts. Review every dependency,
 command, network action, and credential boundary before merging or installing.
 Never commit secrets, tokens, private keys, `.env` files, or proprietary data.
-
