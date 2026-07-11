@@ -1,0 +1,4 @@
+interface:
+  display_name: "Setup Codex Skills"
+  short_description: "Interactively restore preferred Codex skill sets"
+  default_prompt: "Use $setup-codex-skills to inspect this Codex installation and help me choose and install the skill sets I need."

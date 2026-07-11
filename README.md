@@ -64,18 +64,20 @@ Use a skill once without installing it:
 npx skills use AtomFlow-AI/skills --skill rdkit-svg-emphasis --full-depth
 ```
 
-### Bootstrap a new Codex installation
+### Let Codex set up a new installation
 
-Install the complete AtomFlow catalog, the official Lark skill suite, and the
-team's optional Codex plugins with one command:
+Install the setup skill first:
 
 ```bash
-bash scripts/bootstrap_codex_skills.sh
+npx skills add AtomFlow-AI/skills \
+  --skill setup-codex-skills \
+  --global --agent codex --yes --full-depth
 ```
 
-Use `--dry-run` to inspect the commands first. See
-[`docs/codex-bootstrap.md`](docs/codex-bootstrap.md) for the installed sets,
-optional flags, authentication boundary, and items that Codex supplies itself.
+Restart Codex and ask it to use `$setup-codex-skills`. Codex will inspect the
+current installation, present relevant suites and individual skills, and install
+only the selection you request. It can also compare two installations or add a
+single capability later without rerunning a fixed bootstrap script.
 
 ## Publish a personal skill
 
