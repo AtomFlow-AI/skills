@@ -41,7 +41,7 @@ Run:
 
 ```bash
 python scripts/validate_skills.py
-npx skills add . --list
+npx skills add . --list --full-depth
 ```
 
 The first command enforces repository policy. The second confirms that the

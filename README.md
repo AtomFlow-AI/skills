@@ -25,15 +25,15 @@ skills/
 - Skill names are globally unique across the repository. Promote a personal skill
   by moving it into `shared`, not by copying it.
 
-Both layouts are discovered by the standard `skills` CLI without requiring
-recursive-search flags.
+When standalone and packaged layouts coexist, pass `--full-depth` so the
+standard `skills` CLI continues scanning after it finds a shallower skill.
 
 ## Install
 
 List every available skill:
 
 ```bash
-npx skills add AtomFlow-AI/skills --list
+npx skills add AtomFlow-AI/skills --list --full-depth
 ```
 
 Install one skill globally for Codex:
@@ -41,7 +41,7 @@ Install one skill globally for Codex:
 ```bash
 npx skills add AtomFlow-AI/skills \
   --skill rdkit-svg-emphasis \
-  --global --agent codex --yes
+  --global --agent codex --yes --full-depth
 ```
 
 Install one skill globally for Claude Code:
@@ -49,19 +49,19 @@ Install one skill globally for Claude Code:
 ```bash
 npx skills add AtomFlow-AI/skills \
   --skill rdkit-svg-emphasis \
-  --global --agent claude-code --yes
+  --global --agent claude-code --yes --full-depth
 ```
 
 Install interactively and choose the target agent:
 
 ```bash
-npx skills add AtomFlow-AI/skills
+npx skills add AtomFlow-AI/skills --full-depth
 ```
 
 Use a skill once without installing it:
 
 ```bash
-npx skills use AtomFlow-AI/skills --skill rdkit-svg-emphasis
+npx skills use AtomFlow-AI/skills --skill rdkit-svg-emphasis --full-depth
 ```
 
 ## Publish a personal skill
