@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the AtomFlow two-level Agent Skills catalog."""
+"""Validate the AtomFlow owner/package Agent Skills catalog."""
 
 from __future__ import annotations
 
@@ -37,18 +37,31 @@ def frontmatter(path: Path) -> dict[str, str]:
 def main() -> int:
     errors: list[str] = []
     names: dict[str, Path] = {}
-    files = sorted(SKILLS.glob("*/*/SKILL.md"))
+    files = sorted(SKILLS.rglob("SKILL.md"))
 
     if not files:
-        errors.append("no skills found under skills/<owner>/<skill>/SKILL.md")
+        errors.append("no skills found under skills/<owner>/[<package>/]<skill>/SKILL.md")
 
     for path in files:
-        owner = path.parents[1].name
+        relative_parts = path.relative_to(SKILLS).parts
+        if len(relative_parts) not in (3, 4):
+            errors.append(
+                f"{path.relative_to(ROOT)}: skills must use "
+                "skills/<owner>/[<package>/]<skill>/SKILL.md"
+            )
+            continue
+
+        owner = relative_parts[0]
         folder_name = path.parent.name
         rel = path.relative_to(ROOT)
 
         if owner != "shared" and not OWNER_RE.fullmatch(owner):
             errors.append(f"{rel}: invalid GitHub username directory {owner!r}")
+
+        if len(relative_parts) == 4:
+            package = relative_parts[1]
+            if not NAME_RE.fullmatch(package):
+                errors.append(f"{rel}: invalid lowercase hyphenated package name {package!r}")
 
         try:
             meta = frontmatter(path)
@@ -68,14 +81,6 @@ def main() -> int:
             errors.append(f"duplicate skill name {name!r}: {names[name]} and {rel}")
         else:
             names[name] = rel
-
-    stray = sorted(
-        path.relative_to(ROOT)
-        for path in SKILLS.rglob("SKILL.md")
-        if path not in files
-    )
-    for path in stray:
-        errors.append(f"{path}: skills must use skills/<owner>/<skill>/SKILL.md")
 
     if errors:
         print("Skill validation failed:", file=sys.stderr)

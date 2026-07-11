@@ -6,6 +6,11 @@ Publish under `skills/<github-username>/<skill-name>/`. The username directory
 communicates ownership; maintainers may request changes for security, naming, or
 repository-wide compatibility.
 
+For an upstream suite containing multiple independently installable skills, use
+`skills/<github-username>/<package-name>/<skill-name>/`. Package names follow the
+same lowercase hyphenated convention as skill names. Do not add a package layer
+for a single standalone skill.
+
 Each skill must:
 
 - use a globally unique lowercase hyphenated name;
