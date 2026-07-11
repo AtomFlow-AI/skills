@@ -1,0 +1,4 @@
+interface:
+  display_name: "RDKit SVG Emphasis"
+  short_description: "Create reusable filled and dashed molecular SVG emphasis"
+  default_prompt: "Use $rdkit-svg-emphasis to highlight molecular regions in an RDKit SVG."
