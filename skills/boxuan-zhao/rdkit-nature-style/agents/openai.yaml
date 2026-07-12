@@ -1,0 +1,4 @@
+interface:
+  display_name: "RDKit Nature Style"
+  short_description: "Render measured publication-style molecular figures with RDKit"
+  default_prompt: "Use $rdkit-nature-style to render this molecule in a measured Nature-like publication style."
